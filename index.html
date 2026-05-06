@@ -9,22 +9,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IdGuard DNS - Enterprise-Grade Recursive DNS Resolver Managed by Dev'Hunter Security.">
+    <meta name="author" content="Dev'Hunter Security">
+    <meta name="robots" content="index, follow">
     <title>IdGuard DNS | Dev'Hunter Security Threat Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #010203; /* Hampir Hitam Mutlak */
+            --bg-deep: #010203; 
             --bg-panel: #06080a;
-            --border-subtle: rgba(0, 255, 65, 0.1); /* Hijau Matrix Redup */
+            --border-subtle: rgba(0, 255, 65, 0.1); 
             
-            /* Warna Siber Utama */
-            --cyber-green: #00ff41; /* Hijau Matrix */
-            --cyber-cyan: #00ffff; /* Sian Siber Modern */
-            --cyber-red: #ff003c; /* Merah Alert */
+            --cyber-green: #00ff41; 
+            --cyber-cyan: #00ffff; 
+            --cyber-red: #ff003c; 
             
-            /* Glow Effects */
             --glow-green: 0 0 10px rgba(0, 255, 65, 0.5);
             --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.5);
             --glow-red: 0 0 10px rgba(255, 0, 60, 0.5);
@@ -38,7 +39,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: var(--font-mono); /* Terminal Font Everywhere */
+            font-family: var(--font-mono);
             font-weight: 400;
         }
 
@@ -50,7 +51,6 @@
             position: relative;
         }
 
-        /* Latar Belakang Partikel (Simulasi Data) */
         #data-stream {
             position: fixed;
             top: 0;
@@ -67,19 +67,14 @@
             content: " ";
             display: block;
             position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 1000;
             background-size: 100% 4px, 3px 100%;
             pointer-events: none;
             opacity: 0.3;
         }
-
-        a { text-decoration: none; color: inherit; transition: 0.2s; }
-        ul { list-style: none; }
 
         .container {
             max-width: 1200px;
@@ -94,7 +89,7 @@
             background-color: var(--bg-panel);
         }
 
-        .cyber-border::after { /* Sudut Geometris Sian */
+        .cyber-border::after {
             content: '';
             position: absolute;
             bottom: -2px;
@@ -111,7 +106,6 @@
             text-shadow: var(--glow-cyan);
         }
 
-        /* --- Header Section --- */
         header {
             padding: 40px 0;
             text-align: center;
@@ -153,7 +147,6 @@
             letter-spacing: 3px;
         }
 
-        /* --- Dashboard Grid --- */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -161,10 +154,7 @@
             margin-bottom: 40px;
         }
 
-        /* --- Main Content Panel --- */
-        .main-panel {
-            padding: 30px;
-        }
+        .main-panel { padding: 30px; }
 
         .section-header {
             display: flex;
@@ -176,10 +166,7 @@
             padding-bottom: 10px;
         }
 
-        .section-header span {
-            color: var(--cyber-green);
-            font-size: 1.2rem;
-        }
+        .section-header span { color: var(--cyber-green); font-size: 1.2rem; }
 
         .panel-text p {
             font-size: 0.9rem;
@@ -187,10 +174,7 @@
             color: #b0bac5;
         }
 
-        /* --- Metrics Sidebar Panel --- */
-        .metrics-panel {
-            padding: 30px;
-        }
+        .metrics-panel { padding: 30px; }
 
         .metric-item {
             margin-bottom: 25px;
@@ -198,15 +182,11 @@
             border-bottom: 1px solid var(--border-subtle);
         }
 
-        .metric-item:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
-        }
+        .metric-item:last-child { border-bottom: none; }
 
         .metric-label {
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
             color: #64748b;
             margin-bottom: 5px;
         }
@@ -226,7 +206,6 @@
             text-shadow: var(--glow-cyan);
         }
 
-        /* --- Feature Panel (Tactic Tiles) --- */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -248,28 +227,11 @@
             transform: scale(1.02);
         }
 
-        .feature-tile .icon {
-            font-size: 1.8rem;
-            color: var(--cyber-cyan);
-        }
+        .feature-tile .icon { font-size: 1.8rem; }
+        .feature-tile h3 { font-size: 1.1rem; color: #fff; }
+        .feature-tile p { font-size: 0.85rem; color: #64748b; }
 
-        .feature-tile h3 {
-            font-size: 1.1rem;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .feature-tile p {
-            font-size: 0.85rem;
-            color: #64748b;
-            line-height: 1.4;
-        }
-
-        /* --- Connection Status --- */
         .status-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             padding: 20px 30px;
             margin-bottom: 40px;
         }
@@ -278,10 +240,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1rem;
         }
-
-        .status-label { color: #fff; }
 
         .status-dot {
             height: 10px;
@@ -292,35 +251,18 @@
             animation: pulseGreen 1.8s infinite;
         }
 
-        .geo-routing {
-            font-size: 0.8rem;
-            color: #64748b;
-            font-style: italic;
-        }
-
-        /* --- Privacy/Policy Section --- */
-        .privacy-box {
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-
-        /* --- Threat Map Frame Container --- */
         .threat-map-container {
             width: 100%;
             height: 550px;
             margin-top: 15px;
             border: 1px solid var(--border-subtle);
             background-color: #000;
-            position: relative;
         }
 
-        .threat-map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .threat-map-container iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- Footer --- */
+        .privacy-box { padding: 30px; margin-bottom: 40px; }
+
         footer {
             text-align: center;
             padding: 30px 0;
@@ -328,23 +270,16 @@
             font-size: 0.8rem;
         }
 
-        .footer-co {
-            color: var(--cyber-green);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+        .footer-co { color: var(--cyber-green); font-weight: 600; }
 
-        /* --- Cyber Animations --- */
         @keyframes pulseGreen {
             0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
         }
 
-        /* Responsiveness */
         @media (max-width: 900px) {
             .dashboard-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
             .threat-map-container { height: 350px; }
         }
     </style>
@@ -354,7 +289,6 @@
     <canvas id="data-stream"></canvas>
 
     <div class="container">
-
         <header class="cyber-border main-panel">
             <div class="threat-level cyber-glitch-text">STATUS: SECURE</div>
             <h1>SYSTEM ADMINISTRATION & DNS RESOLVER</h1>
@@ -363,10 +297,9 @@
         </header>
 
         <div class="dashboard-grid">
-            
             <section class="cyber-border main-panel panel-text">
                 <div class="section-header">
-                    <span>></span> <h2>System Overview</h2>
+                    <span>&gt;</span> <h2>System Overview</h2>
                 </div>
                 <p>
                     <strong>IdGuard DNS</strong> adalah infrastruktur <em>recursive DNS resolver</em> kelas <em>enterprise</em>, yang dikelola secara presisi oleh <em>System Administrator</em> dan spesialis <em>Cyber Security</em> dari komunitas <strong>JawaTimur Cyber Security</strong> untuk menjamin ketersediaan serta integritas lalu lintas jaringan di wilayah Indonesia.
@@ -381,19 +314,16 @@
 
             <aside class="cyber-border metrics-panel">
                 <div class="section-header">
-                    <span>></span> <h2>Cyber Metrics</h2>
+                    <span>&gt;</span> <h2>Cyber Metrics</h2>
                 </div>
-                
                 <div class="metric-item">
                     <div class="metric-label">Active Blocklists</div>
                     <div class="metric-value">15 <span class="unit">Databases</span></div>
                 </div>
-                
                 <div class="metric-item">
                     <div class="metric-label">Mitigated Threat IPs</div>
                     <div class="metric-value">4 <span class="unit">Feeds</span></div>
                 </div>
-                
                 <div class="metric-item">
                     <div class="metric-label">Global Whitelist</div>
                     <div class="metric-value">2 <span class="unit">Items</span></div>
@@ -433,78 +363,74 @@
                         <span class="cyber-glitch-text" style="font-weight: 600; margin-left: 5px;">ONLINE // All Nodes Active</span>
                     </div>
                 </div>
-                <div class="geo-routing">[ Geo-Routing: Domestik Only ]</div>
+                <div style="font-size: 0.8rem; color: #64748b;">[ Geo-Routing: Domestik Only ]</div>
             </div>
-            
             <div style="border-top: 1px solid var(--border-subtle); width: 100%; padding-top: 10px; font-size: 0.85rem; color: #b0bac5;">
                 🌐 <strong>Systems & Network Ops:</strong> Security Portal & Threat Map
             </div>
-
             <div class="threat-map-container">
-                <iframe src="https://ctmap.indobsd.id/" title="IdGuard DNS Security Operations Center - Threat Map"></iframe>
+                <iframe src="https://ctmap.indobsd.id/" title="IdGuard DNS SOC Map"></iframe>
             </div>
         </section>
 
         <section class="cyber-border privacy-box panel-text">
             <div class="section-header">
-                <span>></span> <h2>Security & Privacy Policy</h2>
+                <span>&gt;</span> <h2>Security & Privacy Policy</h2>
             </div>
-            <p>
-                Seluruh aktivitas dan lalu lintas infrastruktur IdGuard DNS diawasi secara penuh oleh SOC (Security Operations Center) guna memelihara standar keamanan siber tingkat tinggi.
-            </p>
-            <p>
-                Kami menerapkan <strong>No-Log Policy</strong> mutlak pada lalu lintas DNS pengguna untuk memastikan integritas data dan privasi jaringan tetap terjaga.
-            </p>
+            <p>Seluruh aktivitas diawasi secara penuh oleh SOC (Security Operations Center). Kami menerapkan <strong>No-Log Policy</strong> mutlak untuk privasi jaringan.</p>
         </section>
 
-    </div> 
-
-    <footer>
-    <div class="container">
-        <div class="footer-co">Dev'Hunter Security // JawaTimur Cyber Security</div>
-        <div class="footer-tag">NOC-SOC Operations Hub // Cyber & Infrastructure Unit</div>
-        <div style="margin-top: 15px; border-top: 1px solid var(--border-subtle); padding-top: 10px; font-size: 0.7rem; opacity: 0.5;">
-            &copy; 2026 <strong>DevHunter Security</strong>. All rights reserved. <br>
-            Licensed under CC BY-NC-ND 4.0 Intelligence Protocol.
-        </div>
+        <footer>
+            <div class="footer-co">Dev'Hunter Security // JawaTimur Cyber Security</div>
+            <div style="margin-top: 15px; opacity: 0.5;">
+                &copy; 2026 DevHunter Security. Licensed under CC BY-NC-ND 4.0.
+            </div>
+        </footer>
     </div>
-</footer>
 
     <script>
         const canvas = document.getElementById('data-stream');
         const ctx = canvas.getContext('2d');
 
+        // Initial setup
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         const chars = '0123456789ABCDEFGHJIKLMNOPQRSTUVWXYZ[]/*+-.,<>';
         const charArray = chars.split('');
         const fontSize = 10;
-        const columns = canvas.width / fontSize;
+        let columns = canvas.width / fontSize;
         const drops = [];
 
         for (let i = 0; i < columns; i++) {
             drops[i] = 1;
         }
 
+        // --- Logic Resize ---
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const newColumns = canvas.width / fontSize;
+            for (let i = drops.length; i < newColumns; i++) {
+                drops[i] = 1;
+            }
+        });
+
         function draw() {
             ctx.fillStyle = 'rgba(1, 2, 3, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00ff41'; // Matrix Green Redup
+            ctx.fillStyle = '#00ff41'; 
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < drops.length; i++) {
                 const text = charArray[Math.floor(Math.random() * charArray.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
                 drops[i]++;
             }
         }
-
         setInterval(draw, 35);
     </script>
 </body>
