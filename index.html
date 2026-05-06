@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdGuard DNS | Dev'Hunter Security Threat Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #010203; /* Hampir Hitam Mutlak */
+            --bg-panel: #06080a;
+            --border-subtle: rgba(0, 255, 65, 0.1); /* Hijau Matrix Redup */
+            
+            /* Warna Siber Utama */
+            --cyber-green: #00ff41; /* Hijau Matrix */
+            --cyber-cyan: #00ffff; /* Sian Siber Modern */
+            --cyber-red: #ff003c; /* Merah Alert */
+            
+            /* Glow Effects */
+            --glow-green: 0 0 10px rgba(0, 255, 65, 0.5);
+            --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.5);
+            --glow-red: 0 0 10px rgba(255, 0, 60, 0.5);
+
+            --text-main: #d1d5db;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-mono); /* Terminal Font Everywhere */
+            font-weight: 400;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Latar Belakang Partikel (Simulasi Data) */
+        #data-stream {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 1000;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Global Cyber Elements --- */
+        .cyber-border {
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            background-color: var(--bg-panel);
+        }
+
+        .cyber-border::after { /* Sudut Geometris Sian */
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid var(--cyber-cyan);
+            border-right: 2px solid var(--cyber-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .cyber-glitch-text {
+            color: var(--cyber-cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        /* --- Header Section --- */
+        header {
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 30px;
+        }
+
+        .threat-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border: 1px solid var(--cyber-cyan);
+            color: var(--cyber-cyan);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            box-shadow: var(--glow-cyan);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #fff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .security-badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--cyber-green);
+            letter-spacing: 3px;
+        }
+
+        /* --- Dashboard Grid --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Main Content Panel --- */
+        .main-panel {
+            padding: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #fff;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 10px;
+        }
+
+        .section-header span {
+            color: var(--cyber-green);
+            font-size: 1.2rem;
+        }
+
+        .panel-text p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: #b0bac5;
+        }
+
+        /* --- Metrics Sidebar Panel --- */
+        .metrics-panel {
+            padding: 30px;
+        }
+
+        .metric-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .metric-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .metric-value .unit {
+            font-size: 0.9rem;
+            color: var(--cyber-cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        /* --- Feature Panel (Tactic Tiles) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .feature-tile {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: 0.3s ease;
+        }
+
+        .feature-tile:hover {
+            border-color: var(--cyber-cyan);
+            background-color: rgba(0, 255, 255, 0.02);
+            transform: scale(1.02);
+        }
+
+        .feature-tile .icon {
+            font-size: 1.8rem;
+            color: var(--cyber-cyan);
+        }
+
+        .feature-tile h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .feature-tile p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        /* --- Connection Status --- */
+        .status-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1rem;
+        }
+
+        .status-label { color: #fff; }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--cyber-green);
+            border-radius: 50%;
+            box-shadow: var(--glow-green);
+            animation: pulseGreen 1.8s infinite;
+        }
+
+        .geo-routing {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* --- Privacy/Policy Section --- */
+        .privacy-box {
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.8rem;
+        }
+
+        .footer-co {
+            color: var(--cyber-green);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* --- Cyber Animations --- */
+        @keyframes pulseGreen {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="data-stream"></canvas>
+
+    <div class="container">
+
+        <header class="cyber-border main-panel">
+            <div class="threat-level cyber-glitch-text">STATUS: SECURE</div>
+            <h1>SYSTEM ADMINISTRATION & DNS RESOLVER</h1>
+            <p class="hero-tagline">IdGuard DNS Operational Intelligence</p>
+            <p class="security-badge">Dev'Hunter Security // JawaTimur Cyber Security // NOC-SOC Unit</p>
+        </header>
+
+        <div class="dashboard-grid">
+            
+            <section class="cyber-border main-panel panel-text">
+                <div class="section-header">
+                    <span>></span> <h2>System Overview</h2>
+                </div>
+                <p>
+                    <strong>IdGuard DNS</strong> adalah infrastruktur <em>recursive DNS resolver</em> kelas <em>enterprise</em>, yang dikelola secara presisi oleh <em>System Administrator</em> dan spesialis <em>Cyber Security</em> dari komunitas <strong>JawaTimur Cyber Security</strong> untuk menjamin ketersediaan serta integritas lalu lintas jaringan di wilayah Indonesia.
+                </p>
+                <p>
+                    Layanan ini beroperasi sebagai unit <em>threat intelligence</em> terdepan. Melalui optimasi bloklist siber, seluruh upaya komunikasi ke C2 Botnet, server malware, hingga infrastruktur phising dapat dimitigasi secara proaktif langsung pada tingkat DNS. Sistem juga terus beradaptasi dan menginvestigasi tren serangan siber berbasis AI.
+                </p>
+                <p>
+                    Komunitas kami terbuka untuk umum, dirancang secara inklusif sebagai ruang edukasi, bertukar pikiran, dan wadah diskusi seputar tren serta mitigasi ancaman keamanan siber terkini.
+                </p>
+            </section>
+
+            <aside class="cyber-border metrics-panel">
+                <div class="section-header">
+                    <span>></span> <h2>Cyber Metrics</h2>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-label">Active Blocklists</div>
+                    <div class="metric-value">15 <span class="unit">Databases</span></div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-label">Mitigated Threat IPs</div>
+                    <div class="metric-value">4 <span class="unit">Feeds</span></div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-label">Global Whitelist</div>
+                    <div class="metric-value">2 <span class="unit">Items</span></div>
+                </div>
+            </aside>
+        </div>
+
+        <section class="features-grid">
+            <div class="cyber-border feature-tile">
+                <div class="icon">🛡️</div>
+                <h3>Mitigation</h3>
+                <p>Pencegahan ancaman siber secara real-time terhadap penyusupan C2 Botnet dan server malware.</p>
+            </div>
+            <div class="cyber-border feature-tile">
+                <div class="icon">🤖</div>
+                <h3>AI Threat Research</h3>
+                <p>Investigasi berkelanjutan terhadap serangan siber cerdas dan tren penyalahgunaan kecerdasan buatan.</p>
+            </div>
+            <div class="cyber-border feature-tile">
+                <div class="icon">🚫</div>
+                <h3>Filtering</h3>
+                <p>Penerapan perlindungan privasi, penyaringan konten, dan SafeSearch secara menyeluruh.</p>
+            </div>
+            <div class="cyber-border feature-tile">
+                <div class="icon">🇮🇩</div>
+                <h3>Routing</h3>
+                <p>Geo-routing yang dioptimalkan eksklusif untuk jalur domestik Indonesia (IIX/BDI/OpenIXP).</p>
+            </div>
+        </section>
+
+        <section class="cyber-border status-box">
+            <div class="status-left">
+                <div class="status-dot"></div>
+                <div>
+                    <span class="status-label">Operational Status (ID Regional):</span>
+                    <span class="cyber-glitch-text" style="font-weight: 600; margin-left: 5px;">ONLINE // All Nodes Active</span>
+                </div>
+            </div>
+            <div class="geo-routing">[ Geo-Routing: Domestik Only ]</div>
+        </section>
+
+        <section class="cyber-border privacy-box panel-text">
+            <div class="section-header">
+                <span>></span> <h2>Security & Privacy Policy</h2>
+            </div>
+            <p>
+                Seluruh aktivitas dan lalu lintas infrastruktur IdGuard DNS diawasi secara penuh oleh SOC (Security Operations Center) guna memelihara standar keamanan siber tingkat tinggi.
+            </p>
+            <p>
+                Kami menerapkan <strong>No-Log Policy</strong> mutlak pada lalu lintas DNS pengguna untuk memastikan integritas data dan privasi jaringan tetap terjaga.
+            </p>
+        </section>
+
+    </div> 
+
+    <footer>
+        <div class="container">
+            <div class="footer-co">Dev'Hunter Security // JawaTimur Cyber Security</div>
+            <div class="footer-tag">NOC-SOC Operations Hub // Cyber & Infrastructure Unit</div>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('data-stream');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '0123456789ABCDEFGHJIKLMNOPQRSTUVWXYZ[]/*+-.,<>';
+        const charArray = chars.split('');
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(1, 2, 3, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff41'; // Matrix Green Redup
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 35);
+    </script>
+</body>
+</html>
