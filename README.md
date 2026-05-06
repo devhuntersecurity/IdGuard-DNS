@@ -55,6 +55,18 @@ Kami menghargai kontribusi dari komunitas dan administrator jaringan. Jika Anda 
 
 ---
 
+## 📜 Lisensi & Hak Cipta
+
+Seluruh kode sumber, konfigurasi, dan aset visual dalam repositori ini dilindungi oleh hak cipta.
+
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+**Copyright (c) 2026 DevHunter Security.**
+
+Penggunaan materi ini diizinkan selama tetap mencantumkan atribusi asli. Namun, Anda **dilarang keras** untuk melakukan modifikasi (No-Derivatives) atau menggunakan materi ini untuk tujuan komersial (Non-Commercial) tanpa izin tertulis dari pihak DevHunter Security.
+
+---
+
 <div align="center">
 
 **Dev'Hunter Security** *Enterprise Cybersecurity and Infrastructure Operations*
