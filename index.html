@@ -317,16 +317,16 @@
                     <span>&gt;</span> <h2>Cyber Metrics</h2>
                 </div>
                 <div class="metric-item">
-                    <div class="metric-label">Active Blocklists</div>
-                    <div class="metric-value">15 <span class="unit">Databases</span></div>
+                    <div class="metric-label">Total Blocked Domains</div>
+                    <div class="metric-value" id="count-blocklist">... <span class="unit">Domains</span></div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-label">Mitigated Threat IPs</div>
-                    <div class="metric-value">4 <span class="unit">Feeds</span></div>
+                    <div class="metric-value" id="count-iplist">... <span class="unit">IPs</span></div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-label">Global Whitelist</div>
-                    <div class="metric-value">2 <span class="unit">Items</span></div>
+                    <div class="metric-value" id="count-whitelist">... <span class="unit">Items</span></div>
                 </div>
             </aside>
         </div>
@@ -389,10 +389,10 @@
     </div>
 
     <script>
+        // --- Matrix Data Stream Logic ---
         const canvas = document.getElementById('data-stream');
         const ctx = canvas.getContext('2d');
 
-        // Initial setup
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -406,7 +406,6 @@
             drops[i] = 1;
         }
 
-        // --- Logic Resize ---
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -432,6 +431,50 @@
             }
         }
         setInterval(draw, 35);
+
+        // --- GitHub Repository Data Fetcher Logic ---
+        async function countEntriesInFolder(folderPath) {
+            const apiEndpoint = `https://api.github.com/repos/devhuntersecurity/dns-blocklist/contents/${folderPath}`;
+            try {
+                const response = await fetch(apiEndpoint);
+                const files = await response.json();
+                let totalLines = 0;
+
+                for (const file of files) {
+                    if (file.type === 'file' && file.name.endsWith('.txt')) {
+                        const fileContentResponse = await fetch(file.download_url);
+                        const text = await fileContentResponse.text();
+                        // Filter: Abaikan baris kosong dan baris komentar (#)
+                        const lines = text.split('\n').filter(line => {
+                            const trimmed = line.trim();
+                            return trimmed !== '' && !trimmed.startsWith('#');
+                        });
+                        totalLines += lines.length;
+                    }
+                }
+                return totalLines.toLocaleString('id-ID');
+            } catch (error) {
+                console.error(`Error fetching ${folderPath}:`, error);
+                return "ERR";
+            }
+        }
+
+        async function initDashboardMetrics() {
+            // Fetch Blocklist Domains
+            const blocklistTotal = await countEntriesInFolder('BlockList_DB');
+            document.getElementById('count-blocklist').innerHTML = `${blocklistTotal} <span class="unit">Domains</span>`;
+
+            // Fetch IP Threat Lists
+            const iplistTotal = await countEntriesInFolder('IPLists');
+            document.getElementById('count-iplist').innerHTML = `${iplistTotal} <span class="unit">IPs</span>`;
+
+            // Fetch Whitelist Items
+            const whitelistTotal = await countEntriesInFolder('WhiteList%20DB');
+            document.getElementById('count-whitelist').innerHTML = `${whitelistTotal} <span class="unit">Items</span>`;
+        }
+
+        // Initialize metrics on page load
+        initDashboardMetrics();
     </script>
 </body>
 </html>
