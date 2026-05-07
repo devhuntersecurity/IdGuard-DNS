@@ -206,6 +206,32 @@
             text-shadow: var(--glow-cyan);
         }
 
+        /* Identity Link Style */
+        .github-id {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--cyber-cyan);
+            text-decoration: none;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            padding: 4px 10px;
+            transition: 0.3s;
+        }
+
+        .github-id:hover {
+            box-shadow: var(--glow-cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .last-update-box {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 8px;
+            display: block;
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -234,6 +260,16 @@
         .status-box {
             padding: 20px 30px;
             margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .status-header-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .status-left {
@@ -254,7 +290,6 @@
         .threat-map-container {
             width: 100%;
             height: 550px;
-            margin-top: 15px;
             border: 1px solid var(--border-subtle);
             background-color: #000;
         }
@@ -305,11 +340,30 @@
                     <strong>IdGuard DNS</strong> adalah infrastruktur <em>recursive DNS resolver</em> kelas <em>enterprise</em>, yang dikelola secara presisi oleh <em>System Administrator</em> dan spesialis <em>Cyber Security</em> dari komunitas <strong>JawaTimur Cyber Security</strong> untuk menjamin ketersediaan serta integritas lalu lintas jaringan di wilayah Indonesia.
                 </p>
                 <p>
-                    Layanan ini beroperasi sebagai unit <em>threat intelligence</em> terdepan. Melalui optimasi bloklist siber, seluruh upaya komunikasi ke C2 Botnet, server malware, hingga infrastruktur phising dapat dimitigasi secara proaktif langsung pada tingkat DNS. Sistem juga terus beradaptasi dan menginvestigasi tren serangan siber berbasis AI.
+                    Layanan ini beroperasi sebagai unit <em>threat intelligence</em> terdepan. Melalui optimasi bloklist siber, seluruh upaya mitigasi komunikasi ke C2 Botnet, server malware, hingga infrastruktur phising dapat dilakukan secara proaktif langsung pada tingkat DNS.
                 </p>
+                
                 <p>
-                    Komunitas kami terbuka untuk umum, dirancang secara inklusif sebagai ruang edukasi, bertukar pikiran, dan wadah diskusi seputar tren serta mitigasi ancaman keamanan siber terkini.
+                    <strong>Identitas Pengelola:</strong><br>
+                    <a href="https://github.com/devhuntersecurity" target="_blank" class="github-id">
+                        <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <span>devhuntersecurity</span>
+                    </a><br>
+                    <span class="last-update-box">Repo Last Update: <span id="repo-last-update" style="color: var(--cyber-cyan);">Checking...</span></span>
                 </p>
+
+                <div style="margin-top: 20px; padding: 15px; border-left: 2px solid var(--cyber-green); background: rgba(0, 255, 65, 0.03); border-radius: 0 4px 4px 0;">
+                    <p style="font-size: 0.85rem; color: #fff; margin-bottom: 8px; font-weight: 600;">
+                        &gt; COLLABORATION_CALL
+                    </p>
+                    <p style="font-size: 0.85rem; color: #b0bac5; line-height: 1.6; margin-bottom: 0;">
+                        Daftar ancaman diperbarui secara dinamis setiap jam. Kami mengundang praktisi keamanan siber untuk berkontribusi dalam memperkuat database bloklist melalui submisi indikator serangan (IoC) di repositori resmi.
+                    </p>
+                    <div style="margin-top: 10px; font-size: 0.7rem; color: var(--cyber-green); font-family: 'JetBrains Mono'; opacity: 0.7; letter-spacing: 1px;">
+                        [SYSTEM] : Awaiting intelligence input...<br>
+                        [STATUS] : Global DB sync active.
+                    </div>
+                </div>
             </section>
 
             <aside class="cyber-border metrics-panel">
@@ -325,8 +379,12 @@
                     <div class="metric-value" id="count-iplist">... <span class="unit">IPs</span></div>
                 </div>
                 <div class="metric-item">
-                    <div class="metric-label">Global Whitelist</div>
-                    <div class="metric-value" id="count-whitelist">... <span class="unit">Items</span></div>
+                    <div class="metric-label">Total Whitelist Domains</div>
+                    <div class="metric-value" id="count-white-dom">... <span class="unit">Domains</span></div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Total Whitelist IPs</div>
+                    <div class="metric-value" id="count-white-ip">... <span class="unit">IPs</span></div>
                 </div>
             </aside>
         </div>
@@ -354,8 +412,8 @@
             </div>
         </section>
 
-        <section class="cyber-border status-box" style="flex-direction: column; align-items: flex-start; gap: 15px;">
-            <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+        <section class="cyber-border status-box">
+            <div class="status-header-row">
                 <div class="status-left">
                     <div class="status-dot"></div>
                     <div>
@@ -365,7 +423,7 @@
                 </div>
                 <div style="font-size: 0.8rem; color: #64748b;">[ Geo-Routing: Domestik Only ]</div>
             </div>
-            <div style="border-top: 1px solid var(--border-subtle); width: 100%; padding-top: 10px; font-size: 0.85rem; color: #b0bac5;">
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px; font-size: 0.85rem; color: #b0bac5;">
                 🌐 <strong>Systems & Network Ops:</strong> Security Portal & Threat Map
             </div>
             <div class="threat-map-container">
@@ -389,30 +447,22 @@
     </div>
 
     <script>
-        // --- Matrix Data Stream Logic ---
         const canvas = document.getElementById('data-stream');
         const ctx = canvas.getContext('2d');
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         const chars = '0123456789ABCDEFGHJIKLMNOPQRSTUVWXYZ[]/*+-.,<>';
         const charArray = chars.split('');
         const fontSize = 10;
         let columns = canvas.width / fontSize;
         const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
+        for (let i = 0; i < columns; i++) drops[i] = 1;
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             const newColumns = canvas.width / fontSize;
-            for (let i = drops.length; i < newColumns; i++) {
-                drops[i] = 1;
-            }
+            for (let i = drops.length; i < newColumns; i++) drops[i] = 1;
         });
 
         function draw() {
@@ -420,61 +470,57 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00ff41'; 
             ctx.font = fontSize + 'px monospace';
-
             for (let i = 0; i < drops.length; i++) {
                 const text = charArray[Math.floor(Math.random() * charArray.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
         setInterval(draw, 35);
 
-        // --- GitHub Repository Data Fetcher Logic ---
-        async function countEntriesInFolder(folderPath) {
-            const apiEndpoint = `https://api.github.com/repos/devhuntersecurity/dns-blocklist/contents/${folderPath}`;
+        async function fetchMetrics() {
+            const apiRepo = "https://api.github.com/repos/devhuntersecurity/dns-blocklist";
+            const apiContents = apiRepo + "/contents";
+
             try {
-                const response = await fetch(apiEndpoint);
-                const files = await response.json();
-                let totalLines = 0;
-
-                for (const file of files) {
-                    if (file.type === 'file' && file.name.endsWith('.txt')) {
-                        const fileContentResponse = await fetch(file.download_url);
-                        const text = await fileContentResponse.text();
-                        // Filter: Abaikan baris kosong dan baris komentar (#)
-                        const lines = text.split('\n').filter(line => {
-                            const trimmed = line.trim();
-                            return trimmed !== '' && !trimmed.startsWith('#');
-                        });
-                        totalLines += lines.length;
-                    }
+                const resRepo = await fetch(apiRepo);
+                if (resRepo.ok) {
+                    const repoData = await resRepo.json();
+                    const lastUpdate = new Date(repoData.pushed_at);
+                    document.getElementById('repo-last-update').innerText = lastUpdate.toLocaleDateString('id-ID', {
+                        day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    }) + " WIB";
                 }
-                return totalLines.toLocaleString('id-ID');
-            } catch (error) {
-                console.error(`Error fetching ${folderPath}:`, error);
-                return "ERR";
+            } catch (e) { document.getElementById('repo-last-update').innerText = "Error fetching date"; }
+
+            async function countLines(folder, exclude = null, includeOnly = null) {
+                try {
+                    const res = await fetch(`${apiContents}/${encodeURIComponent(folder)}`);
+                    if (!res.ok) return 0;
+                    const files = await res.json();
+                    let total = 0;
+                    for (const file of files) {
+                        if (file.type === 'file') {
+                            if (exclude && file.name === exclude) continue;
+                            if (includeOnly && file.name !== includeOnly) continue;
+                            if (file.name.endsWith('.conf') || file.name.endsWith('.txt')) {
+                                const raw = await fetch(file.download_url);
+                                const text = await raw.text();
+                                total += text.split('\n').filter(l => l.trim() !== '' && !l.trim().startsWith('#') && l.includes('.')).length;
+                            }
+                        }
+                    }
+                    return total;
+                } catch { return 0; }
             }
+            
+            document.getElementById('count-blocklist').innerHTML = `${(await countLines('BlockList_DB')).toLocaleString('id-ID')} <span class="unit">Domains</span>`;
+            document.getElementById('count-iplist').innerHTML = `${(await countLines('IPLists', 'indonesia-netset.txt')).toLocaleString('id-ID')} <span class="unit">IPs</span>`;
+            document.getElementById('count-white-dom').innerHTML = `${(await countLines('WhiteList DB')).toLocaleString('id-ID')} <span class="unit">Domains</span>`;
+            document.getElementById('count-white-ip').innerHTML = `${(await countLines('IPLists', null, 'indonesia-netset.txt')).toLocaleString('id-ID')} <span class="unit">IPs</span>`;
         }
-
-        async function initDashboardMetrics() {
-            // Fetch Blocklist Domains
-            const blocklistTotal = await countEntriesInFolder('BlockList_DB');
-            document.getElementById('count-blocklist').innerHTML = `${blocklistTotal} <span class="unit">Domains</span>`;
-
-            // Fetch IP Threat Lists
-            const iplistTotal = await countEntriesInFolder('IPLists');
-            document.getElementById('count-iplist').innerHTML = `${iplistTotal} <span class="unit">IPs</span>`;
-
-            // Fetch Whitelist Items
-            const whitelistTotal = await countEntriesInFolder('WhiteList%20DB');
-            document.getElementById('count-whitelist').innerHTML = `${whitelistTotal} <span class="unit">Items</span>`;
-        }
-
-        // Initialize metrics on page load
-        initDashboardMetrics();
+        fetchMetrics();
     </script>
 </body>
 </html>
